@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: NutritionScreen(),
-    );
-  }
-}
-
 class NutritionScreen extends StatelessWidget {
+  static String routeName = "/nutrition";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +10,6 @@ class NutritionScreen extends StatelessWidget {
         title: Text('Nutrition'),
       ),
       body: Container(
-        // Tu peux personnaliser ce conteneur selon tes besoins
         alignment: Alignment.center,
         child: Text(
           'Interface de Nutrition',
