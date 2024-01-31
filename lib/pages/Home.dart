@@ -1,8 +1,9 @@
+import 'package:fb_test/pages/Sommeil.dart';
+import 'package:fb_test/pages/Training.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fb_test/pages/Nutrition.dart';
 import 'package:fb_test/pages/Settings.dart';
-import 'package:fb_test/pages/Data.dart';
 import 'package:fb_test/pages/Accueil.dart';
 
 void signUserOut() {
@@ -25,8 +26,9 @@ class _HomeState extends State<Home> {
       body: [
         Accueil(),
         NutritionScreen(),
-        Data(),
-        SettingsScreen()
+        TrainingScreen(),
+        SommeilScreen(),
+        SettingsScreen(),
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -47,6 +49,7 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.sports_volleyball),
             label: 'Training',
           ),
+          NavigationDestination(icon: Icon(Icons.bed), label: 'Sommeil'),
           NavigationDestination(
             icon: Icon(
               Icons.settings,

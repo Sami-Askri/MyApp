@@ -1,15 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-void signUserOut() {
-  FirebaseAuth.instance.signOut();
-}
-
 class Accueil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey[600],
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -76,10 +72,6 @@ class Accueil extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
-                        ),
-                        ElevatedButton(
-                          onPressed: signUserOut,
-                          child: Text('Sign Out'),
                         ),
                       ],
                     ),
