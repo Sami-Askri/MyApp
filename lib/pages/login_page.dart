@@ -1,6 +1,8 @@
+import 'package:fb_test/pages/Home.dart';
+import 'package:fb_test/pages/Signup_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fb_test/components/Button.dart';
+import 'package:fb_test/components/LoginButton.dart';
 import 'package:fb_test/components/text_Field.dart';
 import 'package:fb_test/components/SquareTile.dart';
 import 'package:fb_test/components/image.dart';
@@ -81,7 +83,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 25),
 
                 // sign in button
-                MyButton(
+                LoginButton(
                   onTap: signUserIn,
                 ),
 
@@ -142,11 +144,21 @@ class LoginPage extends StatelessWidget {
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     const SizedBox(width: 4),
-                    const Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Register now',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

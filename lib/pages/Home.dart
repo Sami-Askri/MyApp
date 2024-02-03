@@ -31,6 +31,7 @@ class _HomeState extends State<Home> {
         SettingsScreen(),
       ][currentPageIndex],
       bottomNavigationBar: NavigationBar(
+        backgroundColor: Colors.white,
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
