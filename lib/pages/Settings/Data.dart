@@ -13,11 +13,12 @@ class DataScreen extends StatefulWidget {
 class _DataScreenState extends State<DataScreen> {
   final usernameController = TextEditingController();
   final weightController = TextEditingController();
+  final goalWeightController = TextEditingController();
   String selectedGender = '';
   DateTime? selectedDate;
 
-  Future<void> addData(String username, int weight, String gender,
-      DateTime? date, User? user) async {
+  Future<void> addData(String username, int weight, int goalWeight,
+      String gender, DateTime? date, User? user) async {
     try {
       if (user != null) {
         // Vérifier si le document de l'utilisateur existe déjà
@@ -34,6 +35,8 @@ class _DataScreenState extends State<DataScreen> {
               .update({
             'Username': username.isNotEmpty ? username : userDoc['Username'],
             'Weight': weight != 0 ? weight : userDoc['Weight'],
+            'Goal Weight':
+                goalWeight != 0 ? goalWeight : userDoc['Goal Weight'],
             'Gender': gender.isNotEmpty ? gender : userDoc['Gender'],
             'DateOfBirth': date != null ? date : userDoc['DateOfBirth'],
           });
@@ -46,6 +49,7 @@ class _DataScreenState extends State<DataScreen> {
               .set({
             'Username': username.isNotEmpty ? username : '',
             'Weight': weight != 0 ? weight : 0,
+            'Goal Weight': goalWeight != 0 ? goalWeight : 0,
             'Gender': gender.isNotEmpty ? gender : '',
             'DateOfBirth': date != null ? date : null,
           });
@@ -87,7 +91,13 @@ class _DataScreenState extends State<DataScreen> {
               SizedBox(height: 16.0),
               MyTextField(
                 controller: weightController,
-                hintText: 'Weight',
+                hintText: 'Weight (kg)',
+                obscureText: false,
+              ),
+              SizedBox(height: 16.0),
+              MyTextField(
+                controller: goalWeightController,
+                hintText: 'Goal Weight (kg)',
                 obscureText: false,
               ),
               Row(
@@ -168,6 +178,7 @@ class _DataScreenState extends State<DataScreen> {
                   addData(
                     usernameController.text,
                     int.tryParse(weightController.text) ?? 0,
+                    int.tryParse(goalWeightController.text) ?? 0,
                     selectedGender,
                     selectedDate,
                     user,

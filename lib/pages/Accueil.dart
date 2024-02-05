@@ -5,7 +5,7 @@ class Accueil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[600],
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: FutureBuilder<UserData?>(
@@ -14,6 +14,7 @@ class Accueil extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               String? username = snapshot.data?.Username ?? '';
               int? weight = snapshot.data?.Weight?.toInt() ?? 0;
+              int? goalWeight = snapshot.data?.goalWeight?.toInt() ?? 0;
 
               return Column(
                 children: [
@@ -23,7 +24,7 @@ class Accueil extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.5,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.grey,
                       borderRadius: BorderRadius.all(
                         Radius.circular(15.0),
                       ),
@@ -55,7 +56,7 @@ class Accueil extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                'Weight:  $weight ',
+                                'Current Weight:  $weight kg ',
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -73,7 +74,7 @@ class Accueil extends StatelessWidget {
                               ),
                               SizedBox(height: 5),
                               Text(
-                                'Goal: ',
+                                'Goal Weight: $goalWeight kg',
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,

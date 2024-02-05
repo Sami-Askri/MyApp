@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fb_test/pages/Sommeil.dart';
 import 'package:fb_test/pages/Training.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:fb_test/pages/Nutrition.dart';
 import 'package:fb_test/pages/Settings.dart';
 import 'package:fb_test/pages/Accueil.dart';
@@ -22,43 +23,61 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: [
-        Accueil(),
-        NutritionScreen(),
-        TrainingScreen(),
-        SommeilScreen(),
-        SettingsScreen(),
-      ][currentPageIndex],
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.white,
-        onDestinationSelected: (int index) {
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        currentIndex: currentPageIndex,
+        onTap: (int index) {
           setState(() {
             currentPageIndex = index;
           });
         },
-        destinations: [
-          NavigationDestination(
-            icon: Icon(Icons.home),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              CupertinoIcons.home,
+              color: currentPageIndex == 0 ? Colors.black : Colors.grey,
+            ),
             label: 'Home',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.fastfood_rounded),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.fastfood_outlined,
+              color: currentPageIndex == 1 ? Colors.black : Colors.grey,
+            ),
             label: 'Nutrition',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.sports_volleyball),
+          BottomNavigationBarItem(
+            icon: Icon(
+              CupertinoIcons.sportscourt,
+              color: currentPageIndex == 2 ? Colors.black : Colors.grey,
+            ),
             label: 'Training',
           ),
-          NavigationDestination(icon: Icon(Icons.bed), label: 'Sommeil'),
-          NavigationDestination(
+          BottomNavigationBarItem(
             icon: Icon(
-              Icons.settings,
+              CupertinoIcons.bed_double,
+              color: currentPageIndex == 3 ? Colors.black : Colors.grey,
+            ),
+            label: 'Sommeil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              CupertinoIcons.settings,
+              color: currentPageIndex == 4 ? Colors.black : Colors.grey,
             ),
             label: 'Settings',
           ),
         ],
       ),
+      tabBuilder: (BuildContext context, int index) {
+        return [
+          Accueil(),
+          NutritionScreen(),
+          TrainingScreen(),
+          SommeilScreen(),
+          SettingsScreen(),
+        ][index];
+      },
     );
   }
 }

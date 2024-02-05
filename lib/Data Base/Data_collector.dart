@@ -26,11 +26,13 @@ class UserService {
               userData.containsKey('Username') &&
               userData.containsKey('DateOfBirth') &&
               userData.containsKey('Weight') &&
+              userData.containsKey('Goal Weight') &&
               userData.containsKey('Gender')) {
             return UserData(
               Username: userData['Username'] as String?,
               DateOfBirth: userData['DateOfBirth']?.toDate() as DateTime?,
               Weight: userData['Weight'] as int?,
+              goalWeight: userData['Goal Weight'] as int?,
               Gender: userData['Gender'] as String?,
             );
           }
@@ -50,7 +52,13 @@ class UserData {
   final String? Username;
   final DateTime? DateOfBirth;
   final int? Weight;
+  final int? goalWeight;
   final String? Gender;
 
-  UserData({this.Username, this.DateOfBirth, this.Weight, this.Gender});
+  UserData(
+      {this.Username,
+      this.DateOfBirth,
+      this.Weight,
+      this.goalWeight,
+      this.Gender});
 }
