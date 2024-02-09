@@ -12,48 +12,52 @@ class DataScreen extends StatefulWidget {
 
 class _DataScreenState extends State<DataScreen> {
   final usernameController = TextEditingController();
+  final heightController = TextEditingController();
   final weightController = TextEditingController();
   final goalWeightController = TextEditingController();
   String selectedGender = '';
   DateTime? selectedDate;
 
-  Future<void> addData(String username, int weight, int goalWeight,
-      String gender, DateTime? date, User? user) async {
+  Future<void> addData(String username, double height, int weight,
+      int goalWeight, String gender, DateTime? date, User? user) async {
     try {
       if (user != null) {
-        // Vérifier si le document de l'utilisateur existe déjà
         var userDoc = await FirebaseFirestore.instance
             .collection('users')
             .doc(user.uid)
             .get();
 
         if (userDoc.exists) {
-          // Mettre à jour les données de l'utilisateur existant
           await FirebaseFirestore.instance
               .collection('users')
               .doc(user.uid)
               .update({
             'Username': username.isNotEmpty ? username : userDoc['Username'],
+            'Height': height != 0 ? height : userDoc['Height'],
             'Weight': weight != 0 ? weight : userDoc['Weight'],
             'Goal Weight':
                 goalWeight != 0 ? goalWeight : userDoc['Goal Weight'],
             'Gender': gender.isNotEmpty ? gender : userDoc['Gender'],
             'DateOfBirth': date != null ? date : userDoc['DateOfBirth'],
           });
-          print('Donnée mise à jour avec succès ');
+
+          // Afficher le popup de succès
+          _showSuccessPopup(context);
         } else {
-          // Créer un nouveau document pour le nouvel utilisateur
           await FirebaseFirestore.instance
               .collection('users')
               .doc(user.uid)
               .set({
             'Username': username.isNotEmpty ? username : '',
+            'Height': height != 0 ? height : 0,
             'Weight': weight != 0 ? weight : 0,
             'Goal Weight': goalWeight != 0 ? goalWeight : 0,
             'Gender': gender.isNotEmpty ? gender : '',
             'DateOfBirth': date != null ? date : null,
           });
-          print('Nouvel utilisateur ajouté avec succès ');
+
+          // Afficher le popup de succès
+          _showSuccessPopup(context);
         }
       } else {
         print(
@@ -64,13 +68,42 @@ class _DataScreenState extends State<DataScreen> {
     }
   }
 
+  Future<void> _showSuccessPopup(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Success'),
+          content: Text('Données mises à jour avec succès'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.popUntil(context, ModalRoute.withName('/'));
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Data'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              // Naviguez vers l'écran d'accueil
+              Navigator.pop(context);
+            },
+          ),
+        ],
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(16.0),
           child: Column(
@@ -86,6 +119,12 @@ class _DataScreenState extends State<DataScreen> {
               MyTextField(
                 controller: usernameController,
                 hintText: 'Username',
+                obscureText: false,
+              ),
+              SizedBox(height: 16.0),
+              MyTextField(
+                controller: heightController,
+                hintText: 'Height (m)',
                 obscureText: false,
               ),
               SizedBox(height: 16.0),
@@ -177,6 +216,7 @@ class _DataScreenState extends State<DataScreen> {
                   User? user = FirebaseAuth.instance.currentUser;
                   addData(
                     usernameController.text,
+                    double.tryParse(heightController.text) ?? 0,
                     int.tryParse(weightController.text) ?? 0,
                     int.tryParse(goalWeightController.text) ?? 0,
                     selectedGender,

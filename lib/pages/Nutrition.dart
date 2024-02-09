@@ -9,8 +9,8 @@ class NutritionScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Nutrition'),
       ),
-      body: Container(
-        alignment: Alignment.center,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
         child: Column(
           children: [
             SizedBox(height: 20),

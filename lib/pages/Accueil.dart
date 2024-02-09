@@ -1,4 +1,6 @@
+import 'package:fb_test/Data%20Base/Calories.dart';
 import 'package:fb_test/Data%20Base/Data_collector.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Accueil extends StatelessWidget {
@@ -81,6 +83,13 @@ class Accueil extends StatelessWidget {
                                   color: Colors.black,
                                 ),
                               ),
+                              SizedBox(height: 20),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  await CalorieCalculator.calculateCalories();
+                                },
+                                child: Text('Calories test'),
+                              ),
                             ],
                           ),
                         ),
@@ -90,7 +99,8 @@ class Accueil extends StatelessWidget {
                 ],
               );
             } else {
-              return Container();
+              // Retourne un indicateur de chargement pendant la récupération des données
+              return Center(child: CircularProgressIndicator());
             }
           },
         ),

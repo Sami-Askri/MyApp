@@ -21,29 +21,52 @@ class UserService {
               userSnapshot.data() as Map<String, dynamic>?;
           print('User Data: $userData');
 
-          // Vérifiez que les données essentielles sont présentes avant de créer l'instance UserData
           if (userData != null &&
               userData.containsKey('Username') &&
               userData.containsKey('DateOfBirth') &&
+              userData.containsKey('Height') &&
               userData.containsKey('Weight') &&
               userData.containsKey('Goal Weight') &&
               userData.containsKey('Gender')) {
+            // Calcul de l'âge
+            int age =
+                calculateAge(userData['DateOfBirth']?.toDate() as DateTime?);
+
             return UserData(
               Username: userData['Username'] as String?,
               DateOfBirth: userData['DateOfBirth']?.toDate() as DateTime?,
+              Height: userData['Height'] as double?,
               Weight: userData['Weight'] as int?,
               goalWeight: userData['Goal Weight'] as int?,
               Gender: userData['Gender'] as String?,
+              Age: age,
             );
           }
         }
       }
     } catch (e) {
       print('Erreur lors de la récupération des données utilisateur: $e');
-      // Gérez l'erreur selon vos besoins
     }
 
     return null;
+  }
+
+  // Fonction pour calculer l'âge à partir de la date de naissance
+  int calculateAge(DateTime? DateOfBirth) {
+    if (DateOfBirth == null) {
+      return 0;
+    }
+
+    DateTime currentDate = DateTime.now();
+    int Age = currentDate.year - DateOfBirth.year;
+
+    if (currentDate.month < DateOfBirth.month ||
+        (currentDate.month == DateOfBirth.month &&
+            currentDate.day < DateOfBirth.day)) {
+      Age--;
+    }
+
+    return Age;
   }
 }
 
@@ -51,14 +74,19 @@ class UserService {
 class UserData {
   final String? Username;
   final DateTime? DateOfBirth;
+  final double? Height;
   final int? Weight;
   final int? goalWeight;
   final String? Gender;
+  final int? Age; // Ajout du champ Age
 
-  UserData(
-      {this.Username,
-      this.DateOfBirth,
-      this.Weight,
-      this.goalWeight,
-      this.Gender});
+  UserData({
+    this.Username,
+    this.DateOfBirth,
+    this.Height,
+    this.Weight,
+    this.goalWeight,
+    this.Gender,
+    this.Age,
+  });
 }
