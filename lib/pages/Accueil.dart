@@ -1,106 +1,175 @@
 import 'package:fb_test/Data%20Base/Calories.dart';
 import 'package:fb_test/Data%20Base/Data_collector.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+class ProgressCircle extends StatelessWidget {
+  final double weight;
+  final double goalWeight;
+
+  const ProgressCircle({
+    required this.weight,
+    required this.goalWeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    double progress = (weight / goalWeight).clamp(0.0, 5.0);
+
+    return Column(
+      children: [
+        const Text(
+          'Weight Progress',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        const SizedBox(height: 70),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            CircularProgressIndicator(
+              value: progress,
+              strokeWidth: 100,
+              color: Colors.grey[500],
+              backgroundColor: Colors.grey[200],
+            ),
+            Text(
+              '${(progress * 100).toStringAsFixed(1)}%',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
+}
+
 class Accueil extends StatelessWidget {
+  const Accueil({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
         child: FutureBuilder<UserData?>(
           future: UserService().getUserData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              String? username = snapshot.data?.Username ?? '';
-              int? weight = snapshot.data?.Weight?.toInt() ?? 0;
-              int? goalWeight = snapshot.data?.goalWeight?.toInt() ?? 0;
+              UserData? userData = snapshot.data;
+              String username = userData?.Username ?? '';
+              int weight = userData?.Weight?.toInt() ?? 0;
+              int goalWeight = userData?.goalWeight?.toInt() ?? 0;
+              int age = userData?.Age ?? 0;
 
-              return Column(
+              return Stack(
                 children: [
-                  SizedBox(height: 30),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15.0),
+                    height: MediaQuery.of(context).size.height,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('lib/images/bg.png'),
+                        fit: BoxFit.cover,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 15),
-                          blurRadius: 20,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
                     ),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Welcome Back $username',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                  ),
+                  Column(
+                    children: [
+                      const SizedBox(height: 30),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
                         ),
-                        Divider(
-                          color: Colors.black,
-                          height: 15,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 10),
+                            Text(
+                              'Welcome Back $username',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const Divider(
+                              color: Colors.black,
+                              height: 15,
+                            ),
+                            const SizedBox(height: 5),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Current Weight:  $weight kg ',
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  const Text(
+                                    'Main Activity: ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    'Goal Weight: $goalWeight kg',
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    'Age: $age',
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      await CalorieCalculator
+                                          .calculateCalories();
+                                    },
+                                    child: const Text('Calories test'),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  ProgressCircle(
+                                    weight: weight.toDouble(),
+                                    goalWeight: goalWeight.toDouble(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 5),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              Text(
-                                'Current Weight:  $weight kg ',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                'Main Activity: ',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                'Goal Weight: $goalWeight kg',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () async {
-                                  await CalorieCalculator.calculateCalories();
-                                },
-                                child: Text('Calories test'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               );
             } else {
-              // Retourne un indicateur de chargement pendant la récupération des données
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),

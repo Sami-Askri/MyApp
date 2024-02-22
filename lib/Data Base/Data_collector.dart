@@ -78,7 +78,7 @@ class UserData {
   final int? Weight;
   final int? goalWeight;
   final String? Gender;
-  final int? Age; // Ajout du champ Age
+  final int? Age;
 
   UserData({
     this.Username,

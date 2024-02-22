@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fb_test/pages/Accueil.dart';
+import 'package:fb_test/pages/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fb_test/components/text_Field.dart';
@@ -73,9 +75,15 @@ class _DataScreenState extends State<DataScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Success'),
+          title: Text('Succès'),
           content: Text('Données mises à jour avec succès'),
           actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed('/');
+              },
+              child: Text('Accueil'),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.popUntil(context, ModalRoute.withName('/'));
@@ -93,15 +101,6 @@ class _DataScreenState extends State<DataScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Data'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () {
-              // Naviguez vers l'écran d'accueil
-              Navigator.pop(context);
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Container(

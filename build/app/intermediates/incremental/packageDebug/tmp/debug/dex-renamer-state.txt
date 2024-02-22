@@ -1,4 +1,4 @@
-#Mon Feb 05 16:00:38 CET 2024
+#Thu Feb 22 18:26:47 CET 2024
 base.0=C\:\\DEV\\last_project\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 base.1=C\:\\DEV\\last_project\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes2.dex
 base.2=C\:\\DEV\\last_project\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes3.dex

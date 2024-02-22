@@ -1,3 +1,7 @@
+import 'package:fb_test/pages/Accueil.dart';
+import 'package:fb_test/pages/Home.dart';
+import 'package:fb_test/pages/Settings.dart';
+import 'package:fb_test/pages/Settings/Data.dart';
 import 'package:flutter/material.dart';
 import 'package:fb_test/pages/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,6 +21,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        '/settings': (context) => SettingsScreen(),
+      },
       debugShowCheckedModeBanner: false,
       home: AuthPage(),
     );
