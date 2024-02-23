@@ -1,3 +1,6 @@
+import 'package:fb_test/pages/recettes.dart/pdm.dart';
+import 'package:fb_test/pages/recettes.dart/pdp.dart';
+import 'package:fb_test/pages/recettes.dart/sch.dart';
 import 'package:flutter/material.dart';
 
 class NutritionScreen extends StatelessWidget {
@@ -11,7 +14,7 @@ class NutritionScreen extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('lib/images/bg.png'),
                 fit: BoxFit.cover,
@@ -20,91 +23,129 @@ class NutritionScreen extends StatelessWidget {
           ),
           Column(
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Container(
-                padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.5,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.transparent,
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 10),
-                    Text(
-                      'Sommeil',
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Nutrition',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.black,
                       height: 15,
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.7),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15.0),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 15),
-                            blurRadius: 20,
-                            color: Colors.black.withOpacity(0.5),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pdm(),
                           ),
-                        ],
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        backgroundColor: Colors.grey.withOpacity(0.5),
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
-                      child: Align(
+                      child: const Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Prise de masse',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Prise de masse',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Sch(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        backgroundColor: Colors.grey.withOpacity(0.5),
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            Text(
+                              'Sèche',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     SizedBox(height: 20),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.7),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15.0),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 15),
-                            blurRadius: 20,
-                            color: Colors.black.withOpacity(0.5),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Pdp(),
                           ),
-                        ],
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        backgroundColor: Colors.grey.withOpacity(0.5),
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.7),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15.0),
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            Text(
+                              'Prise de poids',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 15),
-                            blurRadius: 20,
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ],
                       ),
                     ),
                   ],

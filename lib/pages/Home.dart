@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fb_test/pages/Sommeil.dart';
@@ -20,51 +19,50 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int currentPageIndex = 0;
+  int currentPageIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
+        backgroundColor: Colors.transparent,
         currentIndex: currentPageIndex,
         onTap: (int index) {
           setState(() {
             currentPageIndex = index;
           });
         },
+        activeColor: Colors.black,
+        inactiveColor: Colors.black,
+        // ignore: prefer_const_literals_to_create_immutables
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              CupertinoIcons.home,
-              color: currentPageIndex == 0 ? Colors.black : Colors.grey,
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.fastfood_outlined,
-              color: currentPageIndex == 1 ? Colors.black : Colors.grey,
-            ),
-            label: 'Nutrition',
-          ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.sportscourt,
-              color: currentPageIndex == 2 ? Colors.black : Colors.grey,
             ),
             label: 'Training',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
+            icon: Icon(
+              Icons.fastfood_outlined,
+            ),
+            label: 'Nutrition',
+          ),
+          const BottomNavigationBarItem(
+            icon: Icon(
+              CupertinoIcons.home,
+            ),
+            label: 'Home',
+          ),
+          const BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.bed_double,
-              color: currentPageIndex == 3 ? Colors.black : Colors.grey,
             ),
             label: 'Sommeil',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(
               CupertinoIcons.settings,
-              color: currentPageIndex == 4 ? Colors.black : Colors.grey,
             ),
             label: 'Settings',
           ),
@@ -72,11 +70,11 @@ class _HomeState extends State<Home> {
       ),
       tabBuilder: (BuildContext context, int index) {
         return [
-          Accueil(),
-          NutritionScreen(),
           TrainingScreen(),
+          const NutritionScreen(),
+          const Accueil(),
           SommeilScreen(),
-          SettingsScreen(),
+          const SettingsScreen(),
         ][index];
       },
     );

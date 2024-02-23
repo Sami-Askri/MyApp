@@ -75,20 +75,20 @@ class _DataScreenState extends State<DataScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Succès'),
-          content: Text('Données mises à jour avec succès'),
+          title: const Text('Succès'),
+          content: const Text('Données mises à jour avec succès'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed('/');
               },
-              child: Text('Accueil'),
+              child: const Text('Accueil'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.popUntil(context, ModalRoute.withName('/'));
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -100,19 +100,19 @@ class _DataScreenState extends State<DataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data'),
+        title: const Text('Data'),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Update your personal data!',
                 style: TextStyle(fontSize: 18.0),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               MyTextField(
@@ -120,19 +120,19 @@ class _DataScreenState extends State<DataScreen> {
                 hintText: 'Username',
                 obscureText: false,
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               MyTextField(
                 controller: heightController,
                 hintText: 'Height (m)',
                 obscureText: false,
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               MyTextField(
                 controller: weightController,
                 hintText: 'Weight (kg)',
                 obscureText: false,
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               MyTextField(
                 controller: goalWeightController,
                 hintText: 'Goal Weight (kg)',
@@ -141,21 +141,21 @@ class _DataScreenState extends State<DataScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Gender',
                     style: TextStyle(fontSize: 17.0),
                   ),
-                  SizedBox(width: 5.0),
+                  const SizedBox(width: 5.0),
                   Container(
                     height: 40.0,
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    margin: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    margin: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: PopupMenuButton<String>(
-                      icon: Icon(Icons.arrow_drop_down_circle_outlined),
+                      icon: const Icon(Icons.arrow_drop_down_circle_outlined),
                       onSelected: (value) {
                         setState(() {
                           selectedGender = value;
@@ -178,20 +178,20 @@ class _DataScreenState extends State<DataScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Date of Birth: ',
                     style: TextStyle(fontSize: 17.0),
                   ),
                   selectedDate != null
                       ? Text(
                           '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}',
-                          style: TextStyle(fontSize: 17.0),
+                          style: const TextStyle(fontSize: 17.0),
                         )
-                      : Text(
+                      : const Text(
                           'Not selected',
                           style: TextStyle(fontSize: 17.0),
                         ),
-                  SizedBox(width: 5.0),
+                  const SizedBox(width: 5.0),
                   ElevatedButton(
                     onPressed: () async {
                       DateTime? date = await showDatePicker(
@@ -206,7 +206,7 @@ class _DataScreenState extends State<DataScreen> {
                         });
                       }
                     },
-                    child: Text('Pick Date'),
+                    child: const Text('Pick Date'),
                   ),
                 ],
               ),
@@ -223,7 +223,7 @@ class _DataScreenState extends State<DataScreen> {
                     user,
                   );
                 },
-                child: Text('Save Data'),
+                child: const Text('Save Data'),
               ),
             ],
           ),

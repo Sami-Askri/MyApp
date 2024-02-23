@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:fb_test/Data%20Base/Calories.dart';
 import 'package:fb_test/Data%20Base/Data_collector.dart';
 import 'package:flutter/material.dart';
@@ -151,7 +153,7 @@ class Accueil extends StatelessWidget {
                                       await CalorieCalculator
                                           .calculateCalories();
                                     },
-                                    child: const Text('Calories test'),
+                                    child: const Text('Calories'),
                                   ),
                                   const SizedBox(height: 20),
                                   ProgressCircle(
