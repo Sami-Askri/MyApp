@@ -128,6 +128,72 @@ class Sch extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 10),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Détails du repas"),
+                        content: Text(
+                          "200g de blanc de poulet grillé (environ 35g de protéines)\n\n320g de quinoa cuit (environ 20g de glucides)\n\nLégumes vapeur (comme les brocolis, les haricots verts, les carottes) pour les fibres et les vitamines.",
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.5),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 15),
+                        blurRadius: 20,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ],
+                  ),
+                  child: Image.asset(
+                    'lib/images/quinoa.webp',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                width: MediaQuery.of(context).size.width - 40,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                child: Center(
+                  child: Text(
+                    'Poulet grillé avec quinoa et légumes vapeur ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ],

@@ -59,7 +59,7 @@ class Accueil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey,
       body: SingleChildScrollView(
         child: FutureBuilder<UserData?>(
           future: UserService().getUserData(),

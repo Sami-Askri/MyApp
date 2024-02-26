@@ -128,6 +128,72 @@ class Pdm extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 10),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Détails du repas"),
+                        content: Text(
+                          "200g de filet de poisson (comme du saumon ou du tilapia) cuit au four (environ 50g de protéines)\n\n750g de patates douces cuites (environ 150g de glucides)\n\nSalade verte (avec des feuilles de laitue, des épinards, des tomates, etc.) pour les légumes frais et lesfibres.",
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.5),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 15),
+                        blurRadius: 20,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ],
+                  ),
+                  child: Image.asset(
+                    'lib/images/poisson.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                width: MediaQuery.of(context).size.width - 40,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                child: Center(
+                  child: Text(
+                    'Poisson au four avec patates douces et salade verte',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ],

@@ -71,7 +71,7 @@ class Pdp extends StatelessWidget {
                       return AlertDialog(
                         title: Text("Détails du repas"),
                         content: Text(
-                          "150g de steak haché (environ 50g de protéines)\n\n320g de pommes de terre au four (environ 20g de glucides)\n\nRatatouille maison (mélange de courgettes, d'aubergines, de poivrons et de tomates) pour les fibres et les vitamines",
+                          "150g de steak haché (environ 50g de protéines)\n\n320g de pommes de terre au four (environ 65g de glucides)\n\nRatatouille maison (mélange de courgettes, d'aubergines, de poivrons et de tomates) pour les fibres et les vitamines",
                         ),
                         actions: [
                           TextButton(
@@ -119,6 +119,72 @@ class Pdp extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'Steak haché avec pommes de terre au four et ratatouille',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Détails du repas"),
+                        content: Text(
+                          "150g de boeuf sauté (environ 50g de protéines)\n\n200g de riz (environ 50g de glucides)\n\nLégumes sautés (comme des poivrons, des carottes, des brocolis) pour les fibres et les vitamines.",
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.5),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 15),
+                        blurRadius: 20,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ],
+                  ),
+                  child: Image.asset(
+                    'lib/images/boeuf.webp',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                width: MediaQuery.of(context).size.width - 40,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                child: Center(
+                  child: Text(
+                    'Boeuf sauté aux légumes et riz',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,

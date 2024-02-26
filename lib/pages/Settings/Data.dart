@@ -18,10 +18,20 @@ class _DataScreenState extends State<DataScreen> {
   final weightController = TextEditingController();
   final goalWeightController = TextEditingController();
   String selectedGender = '';
+  String Objectif = '';
+  int nb_sech = 0;
   DateTime? selectedDate;
 
-  Future<void> addData(String username, double height, int weight,
-      int goalWeight, String gender, DateTime? date, User? user) async {
+  Future<void> addData(
+      String username,
+      double height,
+      int weight,
+      int goalWeight,
+      String gender,
+      String Objectif,
+      int nb_sech,
+      DateTime? date,
+      User? user) async {
     try {
       if (user != null) {
         var userDoc = await FirebaseFirestore.instance
@@ -40,6 +50,8 @@ class _DataScreenState extends State<DataScreen> {
             'Goal Weight':
                 goalWeight != 0 ? goalWeight : userDoc['Goal Weight'],
             'Gender': gender.isNotEmpty ? gender : userDoc['Gender'],
+            'Objectif': Objectif.isNotEmpty ? Objectif : userDoc['Objectif'],
+            'nb_sech': nb_sech != 0 ? nb_sech : userDoc['nb_sech'],
             'DateOfBirth': date != null ? date : userDoc['DateOfBirth'],
           });
 
@@ -55,6 +67,8 @@ class _DataScreenState extends State<DataScreen> {
             'Weight': weight != 0 ? weight : 0,
             'Goal Weight': goalWeight != 0 ? goalWeight : 0,
             'Gender': gender.isNotEmpty ? gender : '',
+            'Objectif': Objectif.isNotEmpty ? Objectif : '',
+            'nb_sech': nb_sech != 0 ? nb_sech : 0,
             'DateOfBirth': date != null ? date : null,
           });
 
@@ -99,136 +113,260 @@ class _DataScreenState extends State<DataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Data'),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                'Update your personal data!',
-                style: TextStyle(fontSize: 18.0),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              MyTextField(
-                controller: usernameController,
-                hintText: 'Username',
-                obscureText: false,
-              ),
-              const SizedBox(height: 16.0),
-              MyTextField(
-                controller: heightController,
-                hintText: 'Height (m)',
-                obscureText: false,
-              ),
-              const SizedBox(height: 16.0),
-              MyTextField(
-                controller: weightController,
-                hintText: 'Weight (kg)',
-                obscureText: false,
-              ),
-              const SizedBox(height: 16.0),
-              MyTextField(
-                controller: goalWeightController,
-                hintText: 'Goal Weight (kg)',
-                obscureText: false,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Gender',
-                    style: TextStyle(fontSize: 17.0),
-                  ),
-                  const SizedBox(width: 5.0),
-                  Container(
-                    height: 40.0,
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    margin: const EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: PopupMenuButton<String>(
-                      icon: const Icon(Icons.arrow_drop_down_circle_outlined),
-                      onSelected: (value) {
-                        setState(() {
-                          selectedGender = value;
-                        });
-                      },
-                      itemBuilder: (context) => [
-                        const PopupMenuItem<String>(
-                          child: Text('Male'),
-                          value: 'Male',
-                        ),
-                        const PopupMenuItem<String>(
-                          child: Text('Female'),
-                          value: 'Female',
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Date of Birth: ',
-                    style: TextStyle(fontSize: 17.0),
-                  ),
-                  selectedDate != null
-                      ? Text(
-                          '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}',
-                          style: const TextStyle(fontSize: 17.0),
-                        )
-                      : const Text(
-                          'Not selected',
-                          style: TextStyle(fontSize: 17.0),
-                        ),
-                  const SizedBox(width: 5.0),
-                  ElevatedButton(
-                    onPressed: () async {
-                      DateTime? date = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1960),
-                        lastDate: DateTime.now(),
-                      );
-                      if (date != null) {
-                        setState(() {
-                          selectedDate = date;
-                        });
-                      }
-                    },
-                    child: const Text('Pick Date'),
-                  ),
-                ],
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  User? user = FirebaseAuth.instance.currentUser;
-                  addData(
-                    usernameController.text,
-                    double.tryParse(heightController.text) ?? 0,
-                    int.tryParse(weightController.text) ?? 0,
-                    int.tryParse(goalWeightController.text) ?? 0,
-                    selectedGender,
-                    selectedDate,
-                    user,
-                  );
-                },
-                child: const Text('Save Data'),
-              ),
-            ],
+      body: Stack(children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('lib/images/bg.png'),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-      ),
+        Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 30),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    SizedBox(width: 50),
+                    const Expanded(
+                      child: Text(
+                        'Données personnelles',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  color: Colors.black,
+                  height: 15,
+                ),
+                SizedBox(height: 20),
+                MyTextField(
+                  controller: usernameController,
+                  hintText: 'Username',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 16.0),
+                MyTextField(
+                  controller: heightController,
+                  hintText: 'Height (m)',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 16.0),
+                MyTextField(
+                  controller: weightController,
+                  hintText: 'Weight (kg)',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 16.0),
+                MyTextField(
+                  controller: goalWeightController,
+                  hintText: 'Goal Weight (kg)',
+                  obscureText: false,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Objectif',
+                      style: TextStyle(
+                          fontSize: 17.0, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(width: 5.0),
+                    Container(
+                      height: 40.0,
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      margin: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: PopupMenuButton<String>(
+                        icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                        onSelected: (value) {
+                          setState(() {
+                            Objectif = value;
+                          });
+                        },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem<String>(
+                            value: 'Pdm',
+                            child: Text('Prise de masse'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'Sch',
+                            child: Text('Sèche'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'Pdp',
+                            child: Text('Prise de poids'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Nombre de séances',
+                      style: TextStyle(
+                          fontSize: 17.0, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(width: 5.0),
+                    Container(
+                      height: 40.0,
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      margin: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: PopupMenuButton<int>(
+                        icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                        onSelected: (value) {
+                          setState(() {
+                            nb_sech = value;
+                          });
+                        },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem<int>(
+                            value: 1,
+                            child: Text('1'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 2,
+                            child: Text('2'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 3,
+                            child: Text('3'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 4,
+                            child: Text('4'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Gender',
+                      style: TextStyle(
+                          fontSize: 17.0, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(width: 5.0),
+                    Container(
+                      height: 40.0,
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      margin: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: PopupMenuButton<String>(
+                        icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                        onSelected: (value) {
+                          setState(() {
+                            selectedGender = value;
+                          });
+                        },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem<String>(
+                            value: 'Male',
+                            child: Text('Male'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'Female',
+                            child: Text('Female'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Date of Birth: ',
+                      style: TextStyle(
+                          fontSize: 17.0, fontWeight: FontWeight.bold),
+                    ),
+                    selectedDate != null
+                        ? Text(
+                            '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}',
+                            style: const TextStyle(fontSize: 17.0),
+                          )
+                        : const Text(
+                            'Not selected',
+                            style: TextStyle(fontSize: 17.0),
+                          ),
+                    const SizedBox(width: 5.0),
+                    ElevatedButton(
+                      onPressed: () async {
+                        DateTime? date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1960),
+                          lastDate: DateTime.now(),
+                        );
+                        if (date != null) {
+                          setState(() {
+                            selectedDate = date;
+                          });
+                        }
+                      },
+                      child: const Text('Pick Date'),
+                    ),
+                  ],
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    User? user = FirebaseAuth.instance.currentUser;
+                    addData(
+                      usernameController.text,
+                      double.tryParse(heightController.text) ?? 0,
+                      int.tryParse(weightController.text) ?? 0,
+                      int.tryParse(goalWeightController.text) ?? 0,
+                      selectedGender,
+                      Objectif,
+                      nb_sech,
+                      selectedDate,
+                      user,
+                    );
+                  },
+                  child: const Text('Save Data'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

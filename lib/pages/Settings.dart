@@ -57,24 +57,11 @@ class SettingsScreen extends StatelessWidget {
                                 title: Text('Language'),
                                 value: Text('English'),
                               ),
-                              SettingsTile.switchTile(
-                                onToggle: (value) {},
-                                initialValue: true,
-                                leading: Icon(Icons.format_paint),
-                                title: Text('Enable custom theme'),
-                              ),
                             ],
                           ),
                           SettingsSection(
                             title: Text('User'),
                             tiles: <SettingsTile>[
-                              SettingsTile(
-                                title: Text('Sign Out'),
-                                leading: Icon(Icons.logout),
-                                onPressed: (value) {
-                                  signUserOut();
-                                },
-                              ),
                               SettingsTile(
                                 title: Text('Data'),
                                 leading: Icon(Icons.data_saver_on_sharp),
@@ -84,6 +71,13 @@ class SettingsScreen extends StatelessWidget {
                                     MaterialPageRoute(
                                         builder: (context) => DataScreen()),
                                   );
+                                },
+                              ),
+                              SettingsTile(
+                                title: Text('Sign Out'),
+                                leading: Icon(Icons.logout),
+                                onPressed: (value) {
+                                  signUserOut();
                                 },
                               ),
                             ],
