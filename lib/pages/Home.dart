@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
       ),
       tabBuilder: (BuildContext context, int index) {
         return [
-          TrainingScreen(),
+          CustomTrainingScreen(),
           const NutritionScreen(),
           const Accueil(),
           SommeilScreen(),

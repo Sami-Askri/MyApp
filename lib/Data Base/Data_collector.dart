@@ -27,7 +27,9 @@ class UserService {
               userData.containsKey('Height') &&
               userData.containsKey('Weight') &&
               userData.containsKey('Goal Weight') &&
-              userData.containsKey('Gender')) {
+              userData.containsKey('Gender') &&
+              userData.containsKey('Objectif') &&
+              userData.containsKey('nb_sech')) {
             // Calcul de l'âge
             int age =
                 calculateAge(userData['DateOfBirth']?.toDate() as DateTime?);
@@ -40,6 +42,8 @@ class UserService {
               goalWeight: userData['Goal Weight'] as int?,
               Gender: userData['Gender'] as String?,
               Age: age,
+              Objectif: userData['Objectif'] as String?,
+              nb_sech: userData['nb_sech'] as int?,
             );
           }
         }
@@ -79,6 +83,8 @@ class UserData {
   final int? goalWeight;
   final String? Gender;
   final int? Age;
+  final String? Objectif;
+  final int? nb_sech;
 
   UserData({
     this.Username,
@@ -88,5 +94,7 @@ class UserData {
     this.goalWeight,
     this.Gender,
     this.Age,
+    this.Objectif,
+    this.nb_sech,
   });
 }

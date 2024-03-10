@@ -220,6 +220,14 @@ class _DataScreenState extends State<DataScreen> {
                             value: 'Pdp',
                             child: Text('Prise de poids'),
                           ),
+                          const PopupMenuItem<String>(
+                            value: 'Perte_pds',
+                            child: Text('Perte de poids'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'Remise_frm',
+                            child: Text('Remise en forme'),
+                          ),
                         ],
                       ),
                     ),
@@ -265,6 +273,14 @@ class _DataScreenState extends State<DataScreen> {
                           const PopupMenuItem<int>(
                             value: 4,
                             child: Text('4'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 5,
+                            child: Text('5'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 6,
+                            child: Text('6'),
                           ),
                         ],
                       ),
