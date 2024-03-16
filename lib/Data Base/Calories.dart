@@ -12,10 +12,11 @@ class CalorieCalculator {
         int? weight = userData.Weight?.toInt();
         int? goalWeight = userData.goalWeight?.toInt();
         int? age = userData.Age?.toInt();
+        String? objectif = userData.Objectif;
 
         if (age != null) {
-          double calculatedCalories =
-              calculateCaloriesForUser(weight, height, age, gender);
+          double calculatedCalories = calories(
+              calories_maintien(weight, height, age, gender), objectif);
           print('Calculated Calories: $calculatedCalories');
         } else {
           print('La date de naissance est nulle.');
@@ -28,7 +29,7 @@ class CalorieCalculator {
     }
   }
 
-  static double calculateCaloriesForUser(
+  static double calories_maintien(
       int? weight, double height, int age, String? gender) {
     if (gender == 'Male') {
       // Formule pour les hommes
@@ -39,9 +40,20 @@ class CalorieCalculator {
       return (1.375 *
           ((9.740 * weight! + 184.96 * height - 4.6756 * age) + 655.0955));
     } else {
-      // Gérer d'autres genres ici si nécessaire
       print('Genre non reconnu');
-      return 0.0; // Ou une valeur par défaut appropriée
+      return 0.0;
+    }
+  }
+
+  static double calories(double calories_maintien, String? objectif) {
+    if (objectif == "Remise_frm") {
+      return calories_maintien;
+    } else if (objectif == "Pdm") {
+      return calories_maintien + 250;
+    } else if (objectif == "Sch") {
+      return calories_maintien - 250;
+    } else {
+      return 0.0;
     }
   }
 }

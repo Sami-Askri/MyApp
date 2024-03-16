@@ -37,7 +37,7 @@ class Remise_frm1 extends StatelessWidget {
                       children: [
                         SizedBox(height: 10),
                         Text(
-                          'Programme : ${snapshot.data!.Objectif} en ${snapshot.data!.nb_sech} séances par semaine',
+                          'Programme : Remise en forme en ${snapshot.data!.nb_sech} séances par semaine',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

@@ -1,3 +1,9 @@
+import 'package:fb_test/training/Prise%20de%20masse/1.dart';
+import 'package:fb_test/training/Prise%20de%20masse/2.dart';
+import 'package:fb_test/training/Prise%20de%20masse/3.dart';
+import 'package:fb_test/training/Prise%20de%20masse/4.dart';
+import 'package:fb_test/training/Prise%20de%20masse/5.dart';
+import 'package:fb_test/training/Prise%20de%20masse/6.dart';
 import 'package:fb_test/training/Remise%20en%20forme/1.dart';
 import 'package:fb_test/training/Remise%20en%20forme/2.dart';
 import 'package:fb_test/training/Remise%20en%20forme/3.dart';
@@ -44,6 +50,20 @@ class CustomTrainingScreen extends StatelessWidget {
         return Remise_frm5();
       } else if (userData.nb_sech == 6) {
         return Remise_frm6();
+      }
+    } else if (userData.nb_sech != null && userData.Objectif == 'Pdm') {
+      if (userData.nb_sech == 1) {
+        return Pdm1();
+      } else if (userData.nb_sech == 2) {
+        return Pdm2();
+      } else if (userData.nb_sech == 3) {
+        return Pdm3();
+      } else if (userData.nb_sech == 4) {
+        return Pdm4();
+      } else if (userData.nb_sech == 5) {
+        return Pdm5();
+      } else if (userData.nb_sech == 6) {
+        return Pdm6();
       }
     }
 

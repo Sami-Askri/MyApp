@@ -38,7 +38,7 @@ class Remise_frm5 extends StatelessWidget {
                         children: [
                           SizedBox(height: 10),
                           Text(
-                            'Programme : ${snapshot.data!.Objectif} en ${snapshot.data!.nb_sech} séances par semaine',
+                            'Programme : Remise en forme en ${snapshot.data!.nb_sech} séances par semaine',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -48,20 +48,29 @@ class Remise_frm5 extends StatelessWidget {
                           SizedBox(height: 40),
                           ElevatedButton(
                             onPressed: () {
-                              showDialog(
+                              showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Full Body"),
-                                    content: Text("--"),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text("OK"),
-                                      ),
-                                    ],
+                                  return Container(
+                                    child: Column(
+                                      children: [
+                                        Text("Push"),
+                                        SizedBox(height: 16.0),
+                                        Text("------------------"),
+                                        Image.asset(
+                                          'lib/images/remise_frm 5 sch1.png',
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                        ),
+                                        SizedBox(height: 16.0),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK"),
+                                        ),
+                                      ],
+                                    ),
                                   );
                                 },
                               );
@@ -71,20 +80,29 @@ class Remise_frm5 extends StatelessWidget {
                           SizedBox(height: 40),
                           ElevatedButton(
                             onPressed: () {
-                              showDialog(
+                              showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Cardio"),
-                                    content: Text("--"),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text("OK"),
-                                      ),
-                                    ],
+                                  return Container(
+                                    child: Column(
+                                      children: [
+                                        Text("Cardio 1"),
+                                        SizedBox(height: 16.0),
+                                        Text("------------------"),
+                                        Image.asset(
+                                          'lib/images/remise_frm 5 sch2.png',
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                        ),
+                                        SizedBox(height: 16.0),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK"),
+                                        ),
+                                      ],
+                                    ),
                                   );
                                 },
                               );
@@ -94,20 +112,29 @@ class Remise_frm5 extends StatelessWidget {
                           SizedBox(height: 40),
                           ElevatedButton(
                             onPressed: () {
-                              showDialog(
+                              showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Cardio"),
-                                    content: Text("--"),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text("OK"),
-                                      ),
-                                    ],
+                                  return Container(
+                                    child: Column(
+                                      children: [
+                                        Text("Legs"),
+                                        SizedBox(height: 16.0),
+                                        Text("------------------"),
+                                        Image.asset(
+                                          'lib/images/remise_frm 5 sch3.png',
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                        ),
+                                        SizedBox(height: 16.0),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK"),
+                                        ),
+                                      ],
+                                    ),
                                   );
                                 },
                               );
@@ -117,20 +144,29 @@ class Remise_frm5 extends StatelessWidget {
                           SizedBox(height: 40),
                           ElevatedButton(
                             onPressed: () {
-                              showDialog(
+                              showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Cardio"),
-                                    content: Text("--"),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text("OK"),
-                                      ),
-                                    ],
+                                  return Container(
+                                    child: Column(
+                                      children: [
+                                        Text("Cardio 2"),
+                                        SizedBox(height: 16.0),
+                                        Text("------------------"),
+                                        Image.asset(
+                                          'lib/images/remise_frm 5 sch4.png',
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                        ),
+                                        SizedBox(height: 16.0),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK"),
+                                        ),
+                                      ],
+                                    ),
                                   );
                                 },
                               );
@@ -140,20 +176,29 @@ class Remise_frm5 extends StatelessWidget {
                           SizedBox(height: 40),
                           ElevatedButton(
                             onPressed: () {
-                              showDialog(
+                              showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Cardio"),
-                                    content: Text("--"),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text("OK"),
-                                      ),
-                                    ],
+                                  return Container(
+                                    child: Column(
+                                      children: [
+                                        Text("Pull"),
+                                        SizedBox(height: 16.0),
+                                        Text("------------------"),
+                                        Image.asset(
+                                          'lib/images/remise_frm 5 sch5.png',
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                        ),
+                                        SizedBox(height: 16.0),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK"),
+                                        ),
+                                      ],
+                                    ),
                                   );
                                 },
                               );

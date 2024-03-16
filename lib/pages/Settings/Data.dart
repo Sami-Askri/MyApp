@@ -124,7 +124,7 @@ class _DataScreenState extends State<DataScreen> {
             ),
           ),
         ),
-        Container(
+        SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Center(
             child: Column(
@@ -216,14 +216,14 @@ class _DataScreenState extends State<DataScreen> {
                             value: 'Sch',
                             child: Text('Sèche'),
                           ),
-                          const PopupMenuItem<String>(
-                            value: 'Pdp',
-                            child: Text('Prise de poids'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'Perte_pds',
-                            child: Text('Perte de poids'),
-                          ),
+
+                          //const PopupMenuItem<String>(
+                          // value: 'Pdp',
+                          // child: Text('Prise de poids'),
+                          //),const PopupMenuItem<String>(
+                          // value: 'Perte_pds',
+                          // child: Text('Perte de poids'),
+                          // ),
                           const PopupMenuItem<String>(
                             value: 'Remise_frm',
                             child: Text('Remise en forme'),

@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:fb_test/Data%20Base/Calories.dart';
 import 'package:fb_test/Data%20Base/Data_collector.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProgressCircle extends StatelessWidget {
   final double weight;
@@ -19,15 +18,7 @@ class ProgressCircle extends StatelessWidget {
 
     return Column(
       children: [
-        const Text(
-          'Weight Progress',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-        const SizedBox(height: 70),
+        const SizedBox(height: 30),
         Stack(
           alignment: Alignment.center,
           children: [
@@ -53,25 +44,32 @@ class ProgressCircle extends StatelessWidget {
   }
 }
 
-class Accueil extends StatelessWidget {
+class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
+
+  @override
+  _AccueilState createState() => _AccueilState();
+}
+
+class _AccueilState extends State<Accueil> {
+  String? calculatedCalories = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey,
-      body: SingleChildScrollView(
-        child: FutureBuilder<UserData?>(
-          future: UserService().getUserData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              UserData? userData = snapshot.data;
-              String username = userData?.Username ?? '';
-              int weight = userData?.Weight?.toInt() ?? 0;
-              int goalWeight = userData?.goalWeight?.toInt() ?? 0;
-              int age = userData?.Age ?? 0;
+      body: FutureBuilder<UserData?>(
+        future: UserService().getUserData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            UserData? userData = snapshot.data;
+            String username = userData?.Username ?? '';
+            int weight = userData?.Weight?.toInt() ?? 0;
+            int goalWeight = userData?.goalWeight?.toInt() ?? 0;
+            int age = userData?.Age ?? 0;
 
-              return Stack(
+            return SingleChildScrollView(
+              child: Stack(
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width,
@@ -83,98 +81,117 @@ class Accueil extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Column(
-                    children: [
-                      const SizedBox(height: 30),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                        ),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 10),
-                            Text(
-                              'Welcome Back $username',
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 30),
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.5,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
                             ),
-                            const Divider(
-                              color: Colors.black,
-                              height: 15,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                  'Welcome Back $username',
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const Divider(
+                                  color: Colors.black,
+                                  height: 15,
+                                ),
+                                const SizedBox(height: 5),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'Current Weight:  $weight kg ',
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      const Text(
+                                        'Main Activity: ',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        'Goal Weight: $goalWeight kg',
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        'Age: $age',
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () async {
+                                          await CalorieCalculator
+                                              .calculateCalories();
+                                          setState(() {
+                                            calculatedCalories =
+                                                calculatedCalories;
+                                          });
+                                        },
+                                        child: const Text('Calories'),
+                                      ),
+                                      const SizedBox(height: 20),
+                                      Text(
+                                        'Calories Calculated: $calculatedCalories',
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 50),
+                                      ProgressCircle(
+                                        weight: weight.toDouble(),
+                                        goalWeight: goalWeight.toDouble(),
+                                      ),
+                                      const SizedBox(height: 20),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 5),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'Current Weight:  $weight kg ',
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  const Text(
-                                    'Main Activity: ',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    'Goal Weight: $goalWeight kg',
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    'Age: $age',
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      await CalorieCalculator
-                                          .calculateCalories();
-                                    },
-                                    child: const Text('Calories'),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  ProgressCircle(
-                                    weight: weight.toDouble(),
-                                    goalWeight: goalWeight.toDouble(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ],
-              );
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          },
-        ),
+              ),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }
