@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
             icon: Icon(
               CupertinoIcons.sportscourt,
             ),
-            label: 'Training',
+            label: 'Entraînements',
           ),
           const BottomNavigationBarItem(
             icon: Icon(
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
             icon: Icon(
               CupertinoIcons.home,
             ),
-            label: 'Home',
+            label: 'Accueil',
           ),
           const BottomNavigationBarItem(
             icon: Icon(
@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
             icon: Icon(
               CupertinoIcons.settings,
             ),
-            label: 'Settings',
+            label: 'Paramètres',
           ),
         ],
       ),

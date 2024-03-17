@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fb_test/pages/Accueil.dart';
-import 'package:fb_test/pages/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fb_test/components/text_Field.dart';
@@ -162,25 +160,25 @@ class _DataScreenState extends State<DataScreen> {
                 SizedBox(height: 20),
                 MyTextField(
                   controller: usernameController,
-                  hintText: 'Username',
+                  hintText: "Nom d'utilisateur",
                   obscureText: false,
                 ),
                 const SizedBox(height: 16.0),
                 MyTextField(
                   controller: heightController,
-                  hintText: 'Height (m)',
+                  hintText: 'Taille (m)',
                   obscureText: false,
                 ),
                 const SizedBox(height: 16.0),
                 MyTextField(
                   controller: weightController,
-                  hintText: 'Weight (kg)',
+                  hintText: 'Poids actuel (kg)',
                   obscureText: false,
                 ),
                 const SizedBox(height: 16.0),
                 MyTextField(
                   controller: goalWeightController,
-                  hintText: 'Goal Weight (kg)',
+                  hintText: 'Objectif de poids (kg)',
                   obscureText: false,
                 ),
                 Row(
@@ -202,6 +200,7 @@ class _DataScreenState extends State<DataScreen> {
                       ),
                       child: PopupMenuButton<String>(
                         icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                        iconColor: Colors.white,
                         onSelected: (value) {
                           setState(() {
                             Objectif = value;
@@ -237,7 +236,7 @@ class _DataScreenState extends State<DataScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Nombre de séances',
+                      'Nombre de séances (par semaine)',
                       style: TextStyle(
                           fontSize: 17.0, fontWeight: FontWeight.bold),
                     ),
@@ -252,6 +251,7 @@ class _DataScreenState extends State<DataScreen> {
                       ),
                       child: PopupMenuButton<int>(
                         icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                        iconColor: Colors.white,
                         onSelected: (value) {
                           setState(() {
                             nb_sech = value;
@@ -291,7 +291,7 @@ class _DataScreenState extends State<DataScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Gender',
+                      'Sexe',
                       style: TextStyle(
                           fontSize: 17.0, fontWeight: FontWeight.bold),
                     ),
@@ -306,6 +306,7 @@ class _DataScreenState extends State<DataScreen> {
                       ),
                       child: PopupMenuButton<String>(
                         icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                        iconColor: Colors.white,
                         onSelected: (value) {
                           setState(() {
                             selectedGender = value;
@@ -329,7 +330,7 @@ class _DataScreenState extends State<DataScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Date of Birth: ',
+                      'Date de naissance: ',
                       style: TextStyle(
                           fontSize: 17.0, fontWeight: FontWeight.bold),
                     ),
@@ -338,11 +339,7 @@ class _DataScreenState extends State<DataScreen> {
                             '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}',
                             style: const TextStyle(fontSize: 17.0),
                           )
-                        : const Text(
-                            'Not selected',
-                            style: TextStyle(fontSize: 17.0),
-                          ),
-                    const SizedBox(width: 5.0),
+                        : const SizedBox(width: 5.0),
                     ElevatedButton(
                       onPressed: () async {
                         DateTime? date = await showDatePicker(
@@ -357,8 +354,11 @@ class _DataScreenState extends State<DataScreen> {
                           });
                         }
                       },
-                      child: const Text('Pick Date'),
-                    ),
+                      child: const Text(
+                        'Pick Date',
+                        style: TextStyle(color: Colors.black, fontSize: 15),
+                      ),
+                    )
                   ],
                 ),
                 ElevatedButton(
@@ -376,7 +376,10 @@ class _DataScreenState extends State<DataScreen> {
                       user,
                     );
                   },
-                  child: const Text('Save Data'),
+                  child: const Text(
+                    'Save Data',
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                  ),
                 ),
               ],
             ),

@@ -1,7 +1,6 @@
 import 'package:fb_test/Data%20Base/Calories.dart';
 import 'package:fb_test/Data%20Base/Data_collector.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProgressCircle extends StatelessWidget {
   final double weight;
@@ -15,7 +14,6 @@ class ProgressCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double progress = (weight / goalWeight).clamp(0.0, 5.0);
-
     return Column(
       children: [
         const SizedBox(height: 30),
@@ -52,7 +50,19 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> {
-  String? calculatedCalories = '';
+  late double calculatedCalories;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCalories();
+  }
+
+  void fetchCalories() async {
+    calculatedCalories = await CalorieCalculator.calculateCalories();
+    setState(
+        () {}); // Mettre à jour l'interface après avoir récupéré les données
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +77,47 @@ class _AccueilState extends State<Accueil> {
             int weight = userData?.Weight?.toInt() ?? 0;
             int goalWeight = userData?.goalWeight?.toInt() ?? 0;
             int age = userData?.Age ?? 0;
+            String objectif = userData?.Objectif ?? '';
+
+            // Contrôle de l'affichage de l'objectif en fonction de conditions
+            Widget objectifWidget;
+            if (objectif == 'Remise_frm') {
+              objectifWidget = Text(
+                'Objectif: Remise en forme',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              );
+            } else if (objectif == 'Pdm') {
+              objectifWidget = Text(
+                'Objectif: Prise de masse',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              );
+            } else if (objectif == 'Sch') {
+              objectifWidget = Text(
+                'Objectif: Sèche',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              );
+            } else {
+              objectifWidget = Text(
+                'Objectif inconnu',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              );
+            }
 
             return SingleChildScrollView(
               child: Stack(
@@ -98,7 +149,7 @@ class _AccueilState extends State<Accueil> {
                               children: [
                                 SizedBox(height: 10),
                                 Text(
-                                  'Welcome Back $username',
+                                  'Bienvenue $username',
                                   style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -115,7 +166,7 @@ class _AccueilState extends State<Accueil> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        'Current Weight:  $weight kg ',
+                                        'Poids actuel:  $weight kg ',
                                         style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
@@ -123,17 +174,10 @@ class _AccueilState extends State<Accueil> {
                                         ),
                                       ),
                                       const SizedBox(height: 5),
-                                      const Text(
-                                        'Main Activity: ',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                      ),
+                                      objectifWidget,
                                       const SizedBox(height: 5),
                                       Text(
-                                        'Goal Weight: $goalWeight kg',
+                                        'Poids objectif: $goalWeight kg',
                                         style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
@@ -149,27 +193,25 @@ class _AccueilState extends State<Accueil> {
                                           color: Colors.black,
                                         ),
                                       ),
-                                      ElevatedButton(
-                                        onPressed: () async {
-                                          await CalorieCalculator
-                                              .calculateCalories();
-                                          setState(() {
-                                            calculatedCalories =
-                                                calculatedCalories;
-                                          });
-                                        },
-                                        child: const Text('Calories'),
-                                      ),
                                       const SizedBox(height: 20),
                                       Text(
-                                        'Calories Calculated: $calculatedCalories',
+                                        'Besoin calorique journalier: ${calculatedCalories.toStringAsFixed(2)} kcal',
                                         style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
                                       ),
-                                      const SizedBox(height: 50),
+                                      const SizedBox(height: 30),
+                                      Text(
+                                        'Progression',
+                                        style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 40),
                                       ProgressCircle(
                                         weight: weight.toDouble(),
                                         goalWeight: goalWeight.toDouble(),

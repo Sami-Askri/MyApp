@@ -1,7 +1,6 @@
 import 'package:fb_test/components/SignUpButton.dart';
 import 'package:fb_test/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fb_test/components/text_Field.dart';
 import 'package:fb_test/components/image.dart';
