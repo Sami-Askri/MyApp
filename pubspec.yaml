@@ -45,7 +45,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  url_launcher: ^6.0.13
+  fl_chart: ^0.66.2
+  flutter_chart: ^0.1.6
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

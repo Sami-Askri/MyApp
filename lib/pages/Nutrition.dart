@@ -37,9 +37,9 @@ class NutritionScreen extends StatelessWidget {
                     const Text(
                       'Nutrition',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                     const Divider(
@@ -71,7 +71,7 @@ class NutritionScreen extends StatelessWidget {
                             Text(
                               'Prise de masse',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -105,7 +105,7 @@ class NutritionScreen extends StatelessWidget {
                             Text(
                               'Sèche',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -137,9 +137,9 @@ class NutritionScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              'Prise de poids',
+                              'Maintien',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),

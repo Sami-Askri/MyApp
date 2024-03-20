@@ -10,8 +10,15 @@ import 'package:fb_test/training/Remise%20en%20forme/3.dart';
 import 'package:fb_test/training/Remise%20en%20forme/4.dart';
 import 'package:fb_test/training/Remise%20en%20forme/5.dart';
 import 'package:fb_test/training/Remise%20en%20forme/6.dart';
+import 'package:fb_test/training/S%C3%A8che/1.dart';
+import 'package:fb_test/training/S%C3%A8che/2.dart';
+import 'package:fb_test/training/S%C3%A8che/3.dart';
+import 'package:fb_test/training/S%C3%A8che/5.dart';
 import 'package:flutter/material.dart';
 import 'package:fb_test/Data%20Base/Data_collector.dart';
+
+import '../training/Sèche/4.dart';
+import '../training/Sèche/6.dart';
 
 class CustomTrainingScreen extends StatelessWidget {
   final UserService _userService = UserService();
@@ -65,9 +72,25 @@ class CustomTrainingScreen extends StatelessWidget {
       } else if (userData.nb_sech == 6) {
         return Pdm6();
       }
+    } else if (userData.nb_sech != null && userData.Objectif == 'Sch') {
+      if (userData.nb_sech == 1) {
+        return Sch1();
+      } else if (userData.nb_sech == 2) {
+        return Sch2();
+      } else if (userData.nb_sech == 3) {
+        return Sch3();
+      } else if (userData.nb_sech == 4) {
+        return Sch4();
+      } else if (userData.nb_sech == 5) {
+        return Sch5();
+      } else if (userData.nb_sech == 6) {
+        return Sch6();
+      }
     }
 
     // Default case or return an empty container if needed
-    return Container();
+    return Container(
+      child: Center(child: Text("Programme indisponible pour le moment...")),
+    );
   }
 }

@@ -45,37 +45,6 @@ class Pdm2 extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 40),
-                        ElevatedButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Container(
-                                  child: Column(
-                                    children: [
-                                      Text("Full Body"),
-                                      SizedBox(height: 16.0),
-                                      Text("------------------"),
-                                      Image.asset(
-                                        'lib/images/remise_frm 1.png',
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                      ),
-                                      SizedBox(height: 16.0),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text("OK"),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Text("Séance n°1"),
-                        ),
                       ],
                     );
                   } else {

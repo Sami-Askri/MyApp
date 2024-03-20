@@ -101,8 +101,8 @@ def plot_hours_data(data=dict, heures=tuple):
 
     # Affichez le graphique
     plt.tight_layout()
-    plt.show()
     plt.savefig('lib/images/courbe')
+    plt.show()
 hours = (22, 8)
 data = {"500": 2.3, "1204": 1.8, "2000": 2.65, "2001": 3.2, "3000": 1.5, "12568":2}
 result = sec_to_hours(data, hours[0], hours[1])

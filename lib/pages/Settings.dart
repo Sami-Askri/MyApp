@@ -41,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               const Divider(

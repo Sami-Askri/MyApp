@@ -85,36 +85,36 @@ class _AccueilState extends State<Accueil> {
               objectifWidget = Text(
                 'Objectif: Remise en forme',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               );
             } else if (objectif == 'Pdm') {
               objectifWidget = Text(
                 'Objectif: Prise de masse',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               );
             } else if (objectif == 'Sch') {
               objectifWidget = Text(
                 'Objectif: Sèche',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               );
             } else {
               objectifWidget = Text(
                 'Objectif inconnu',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               );
             }
@@ -151,14 +151,15 @@ class _AccueilState extends State<Accueil> {
                                 Text(
                                   'Bienvenue $username',
                                   style: const TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 24,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 const Divider(
                                   color: Colors.black,
                                   height: 15,
+                                  thickness: 2,
                                 ),
                                 const SizedBox(height: 5),
                                 Align(
@@ -168,9 +169,9 @@ class _AccueilState extends State<Accueil> {
                                       Text(
                                         'Poids actuel:  $weight kg ',
                                         style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                          color: Colors.white,
                                         ),
                                       ),
                                       const SizedBox(height: 5),
@@ -179,25 +180,25 @@ class _AccueilState extends State<Accueil> {
                                       Text(
                                         'Poids objectif: $goalWeight kg',
                                         style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                          color: Colors.white,
                                         ),
                                       ),
                                       const SizedBox(height: 5),
                                       Text(
                                         'Age: $age',
                                         style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                          color: Colors.white,
                                         ),
                                       ),
                                       const SizedBox(height: 20),
                                       Text(
                                         'Besoin calorique journalier: ${calculatedCalories.toStringAsFixed(2)} kcal',
                                         style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
@@ -206,7 +207,7 @@ class _AccueilState extends State<Accueil> {
                                       Text(
                                         'Progression',
                                         style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),

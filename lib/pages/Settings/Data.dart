@@ -187,7 +187,9 @@ class _DataScreenState extends State<DataScreen> {
                     const Text(
                       'Objectif',
                       style: TextStyle(
-                          fontSize: 17.0, fontWeight: FontWeight.bold),
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     const SizedBox(width: 5.0),
                     Container(
@@ -238,7 +240,9 @@ class _DataScreenState extends State<DataScreen> {
                     const Text(
                       'Nombre de séances (par semaine)',
                       style: TextStyle(
-                          fontSize: 17.0, fontWeight: FontWeight.bold),
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     const SizedBox(width: 5.0),
                     Container(
@@ -293,7 +297,9 @@ class _DataScreenState extends State<DataScreen> {
                     const Text(
                       'Sexe',
                       style: TextStyle(
-                          fontSize: 17.0, fontWeight: FontWeight.bold),
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     const SizedBox(width: 5.0),
                     Container(
@@ -315,11 +321,11 @@ class _DataScreenState extends State<DataScreen> {
                         itemBuilder: (context) => [
                           const PopupMenuItem<String>(
                             value: 'Male',
-                            child: Text('Male'),
+                            child: Text('Mâle'),
                           ),
                           const PopupMenuItem<String>(
                             value: 'Female',
-                            child: Text('Female'),
+                            child: Text('Femelle'),
                           ),
                         ],
                       ),
@@ -332,7 +338,9 @@ class _DataScreenState extends State<DataScreen> {
                     const Text(
                       'Date de naissance: ',
                       style: TextStyle(
-                          fontSize: 17.0, fontWeight: FontWeight.bold),
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                     selectedDate != null
                         ? Text(
@@ -355,7 +363,7 @@ class _DataScreenState extends State<DataScreen> {
                         }
                       },
                       child: const Text(
-                        'Pick Date',
+                        'Sélectionner une date',
                         style: TextStyle(color: Colors.black, fontSize: 15),
                       ),
                     )
@@ -377,7 +385,7 @@ class _DataScreenState extends State<DataScreen> {
                     );
                   },
                   child: const Text(
-                    'Save Data',
+                    'Enregistrer',
                     style: TextStyle(color: Colors.black, fontSize: 15),
                   ),
                 ),

@@ -32,8 +32,9 @@ class _HomeState extends State<Home> {
             currentPageIndex = index;
           });
         },
-        activeColor: Colors.black,
-        inactiveColor: Colors.black,
+        activeColor: Colors.white,
+        inactiveColor: Colors.black, // Set inactive color to black
+
         // ignore: prefer_const_literals_to_create_immutables
         items: [
           const BottomNavigationBarItem(
