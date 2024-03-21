@@ -15,6 +15,7 @@ class _DataScreenState extends State<DataScreen> {
   final heightController = TextEditingController();
   final weightController = TextEditingController();
   final goalWeightController = TextEditingController();
+  final sleepdataController = TextEditingController();
   String selectedGender = '';
   String Objectif = '';
   int nb_sech = 0;
@@ -25,6 +26,7 @@ class _DataScreenState extends State<DataScreen> {
       double height,
       int weight,
       int goalWeight,
+      String sleepData,
       String gender,
       String Objectif,
       int nb_sech,
@@ -47,6 +49,7 @@ class _DataScreenState extends State<DataScreen> {
             'Weight': weight != 0 ? weight : userDoc['Weight'],
             'Goal Weight':
                 goalWeight != 0 ? goalWeight : userDoc['Goal Weight'],
+            'Sleep Data': sleepData,
             'Gender': gender.isNotEmpty ? gender : userDoc['Gender'],
             'Objectif': Objectif.isNotEmpty ? Objectif : userDoc['Objectif'],
             'nb_sech': nb_sech != 0 ? nb_sech : userDoc['nb_sech'],
@@ -64,6 +67,7 @@ class _DataScreenState extends State<DataScreen> {
             'Height': height != 0 ? height : 0,
             'Weight': weight != 0 ? weight : 0,
             'Goal Weight': goalWeight != 0 ? goalWeight : 0,
+            'Data': sleepData,
             'Gender': gender.isNotEmpty ? gender : '',
             'Objectif': Objectif.isNotEmpty ? Objectif : '',
             'nb_sech': nb_sech != 0 ? nb_sech : 0,
@@ -178,7 +182,13 @@ class _DataScreenState extends State<DataScreen> {
                 const SizedBox(height: 16.0),
                 MyTextField(
                   controller: goalWeightController,
-                  hintText: 'Objectif de poids (kg)',
+                  hintText: 'Poids objectif',
+                  obscureText: false,
+                ),
+                const SizedBox(height: 16.0),
+                MyTextField(
+                  controller: sleepdataController,
+                  hintText: 'Données de sommeil',
                   obscureText: false,
                 ),
                 Row(
@@ -342,12 +352,6 @@ class _DataScreenState extends State<DataScreen> {
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    selectedDate != null
-                        ? Text(
-                            '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}',
-                            style: const TextStyle(fontSize: 17.0),
-                          )
-                        : const SizedBox(width: 5.0),
                     ElevatedButton(
                       onPressed: () async {
                         DateTime? date = await showDatePicker(
@@ -377,6 +381,7 @@ class _DataScreenState extends State<DataScreen> {
                       double.tryParse(heightController.text) ?? 0,
                       int.tryParse(weightController.text) ?? 0,
                       int.tryParse(goalWeightController.text) ?? 0,
+                      sleepdataController.text,
                       selectedGender,
                       Objectif,
                       nb_sech,

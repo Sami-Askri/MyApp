@@ -50,7 +50,7 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilState extends State<Accueil> {
-  late double calculatedCalories;
+  late double calculatedCalories = 0.0;
 
   @override
   void initState() {
