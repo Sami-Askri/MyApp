@@ -28,6 +28,7 @@ class UserService {
               userData.containsKey('Weight') &&
               userData.containsKey('Goal Weight') &&
               userData.containsKey('Data') &&
+              userData.containsKey('NAP') &&
               userData.containsKey('Gender') &&
               userData.containsKey('Objectif') &&
               userData.containsKey('nb_sech')) {
@@ -42,6 +43,7 @@ class UserService {
               Weight: userData['Weight'] as int?,
               goalWeight: userData['Goal Weight'] as int?,
               sleepData: userData['Data'] as String?,
+              NAP: userData['NAP'] as double?,
               Gender: userData['Gender'] as String?,
               Age: age,
               Objectif: userData['Objectif'] as String?,
@@ -85,6 +87,7 @@ class UserData {
   final int? goalWeight;
   final String? sleepData;
   final String? Gender;
+  final double? NAP;
   final int? Age;
   final String? Objectif;
   final int? nb_sech;
@@ -96,6 +99,7 @@ class UserData {
     this.Weight,
     this.goalWeight,
     this.sleepData,
+    this.NAP,
     this.Gender,
     this.Age,
     this.Objectif,

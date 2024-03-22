@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ class _DataScreenState extends State<DataScreen> {
   final sleepdataController = TextEditingController();
   String selectedGender = '';
   String Objectif = '';
+  double NAP = 1.0;
   int nb_sech = 0;
   DateTime? selectedDate;
 
@@ -29,6 +32,7 @@ class _DataScreenState extends State<DataScreen> {
       String sleepData,
       String gender,
       String Objectif,
+      double NAP,
       int nb_sech,
       DateTime? date,
       User? user) async {
@@ -51,6 +55,7 @@ class _DataScreenState extends State<DataScreen> {
                 goalWeight != 0 ? goalWeight : userDoc['Goal Weight'],
             'Sleep Data': sleepData,
             'Gender': gender.isNotEmpty ? gender : userDoc['Gender'],
+            'NAP': NAP != 0 ? NAP : userDoc['NAP'],
             'Objectif': Objectif.isNotEmpty ? Objectif : userDoc['Objectif'],
             'nb_sech': nb_sech != 0 ? nb_sech : userDoc['nb_sech'],
             'DateOfBirth': date != null ? date : userDoc['DateOfBirth'],
@@ -69,6 +74,7 @@ class _DataScreenState extends State<DataScreen> {
             'Goal Weight': goalWeight != 0 ? goalWeight : 0,
             'Data': sleepData,
             'Gender': gender.isNotEmpty ? gender : '',
+            'NAP': NAP != 0 ? NAP : 0,
             'Objectif': Objectif.isNotEmpty ? Objectif : '',
             'nb_sech': nb_sech != 0 ? nb_sech : 0,
             'DateOfBirth': date != null ? date : null,
@@ -305,6 +311,59 @@ class _DataScreenState extends State<DataScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
+                      "NAP (nombre d'activité physique)",
+                      style: TextStyle(
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    const SizedBox(width: 5.0),
+                    Container(
+                      height: 40.0,
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      margin: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: PopupMenuButton<double>(
+                        icon: const Icon(Icons.arrow_drop_down_circle_outlined),
+                        iconColor: Colors.white,
+                        onSelected: (value) {
+                          setState(() {
+                            NAP = value;
+                          });
+                        },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem<double>(
+                            value: 1.0,
+                            child: Text('1.0'),
+                          ),
+                          const PopupMenuItem<double>(
+                            value: 1.2,
+                            child: Text('1.2'),
+                          ),
+                          const PopupMenuItem<double>(
+                            value: 1.3,
+                            child: Text('1.3'),
+                          ),
+                          const PopupMenuItem<double>(
+                            value: 1.4,
+                            child: Text('1.4'),
+                          ),
+                          const PopupMenuItem<double>(
+                            value: 1.5,
+                            child: Text('1.5'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
                       'Sexe',
                       style: TextStyle(
                           fontSize: 17.0,
@@ -384,6 +443,7 @@ class _DataScreenState extends State<DataScreen> {
                       sleepdataController.text,
                       selectedGender,
                       Objectif,
+                      NAP,
                       nb_sech,
                       selectedDate,
                       user,

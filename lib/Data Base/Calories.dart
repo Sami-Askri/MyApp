@@ -11,10 +11,11 @@ class CalorieCalculator {
         int? weight = userData.Weight?.toInt();
         int? age = userData.Age?.toInt();
         String? objectif = userData.Objectif;
+        double? NAP = userData.NAP!.toDouble();
 
         if (age != null) {
           double calculatedCalories =
-              caloriesMaintenance(weight, height, age, gender);
+              caloriesMaintenance(weight, height, age, gender, NAP);
           double adjustedCalories =
               calculateAdjustedCalories(calculatedCalories, objectif);
           return adjustedCalories;
@@ -30,15 +31,17 @@ class CalorieCalculator {
   }
 
   static double caloriesMaintenance(
-      int? weight, double height, int age, String? gender) {
+      int? weight, double height, int age, String? gender, double? NAP) {
     if (gender == 'Male') {
       // Formule pour les hommes
       return (1.375 *
-          ((13.7516 * weight! + 500.33 * height - 6.7550 * age) + 66.479));
+          ((13.7516 * weight! + 500.33 * height - 6.7550 * age) + 66.479) *
+          NAP!);
     } else if (gender == 'Female') {
       // Formule pour les femmes (ajustez cela en fonction de vos besoins)
       return (1.375 *
-          ((9.740 * weight! + 184.96 * height - 4.6756 * age) + 655.0955));
+          ((9.740 * weight! + 184.96 * height - 4.6756 * age) + 655.0955) *
+          NAP!);
     } else {
       throw Exception('Genre non reconnu');
     }
